@@ -4,7 +4,7 @@ import Home from './pages/Home';
 import AddEmp from './pages/AddEmp';
 import GetEmployees from './pages/GetEmployees';
 import EditEmployee from './pages/EditEmployee';
-
+import PrivateRoute from './components/PrivateRoute';
 
 
 function App() {
@@ -13,10 +13,12 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/signin' element={<Login/>}/>
+        <Route element={<PrivateRoute/>}>
         <Route path='/home' element={<Home/>}/>
         <Route path='/addemp' element={<AddEmp/>}/>
         <Route path='getemployees' element={<GetEmployees/>}/>
         <Route path='/editemployee/:id' element={<EditEmployee/>}/>
+        </Route>
       </Routes>
     </BrowserRouter>
   )

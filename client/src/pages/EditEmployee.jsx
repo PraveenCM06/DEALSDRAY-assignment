@@ -72,15 +72,18 @@ const converToBase64 = (e) => {
 
 const handleChange = (e) => {
   if (e.target.id === "mca" || e.target.id === "bca" || e.target.id === "be") {
+    const selectedCourse = e.target.value;
     if (e.target.checked) {
-      setFormData({
-        ...formData,
-        course: [...formData.course, e.target.id], 
-      });
+      if (!formData.course.includes(selectedCourse)) {
+        setFormData({
+          ...formData,
+          course: [...formData.course, selectedCourse],
+        });
+      }
     } else {
       setFormData({
         ...formData,
-        course: formData.course.filter(course => course !== e.target.id), 
+        course: formData.course.filter(course => course !== selectedCourse),
       });
     }
   } else if (e.target.name === "gender") {
@@ -95,66 +98,63 @@ const handleChange = (e) => {
     });
   }
 };
-
-
-  
   return (
     <div >
       <Header />
       <div className="min-w-full flex justify-center">
-      <form onSubmit={handleSubmit} className="flex flex-col justify-center w-80 gap-3 m-5 p-5 border border-slate-400 rounded-lg">
-        <div className="flex gap-2">
+      <form onSubmit={handleSubmit} className="flex flex-col justify-center w-80 gap-3 m-5 p-5 border bg-slate-700 rounded-lg text-slate-300">
+        <div className="flex gap-2 items-center">
           <label htmlFor="name">Name</label>
           <input
             id="name"
             type="text"
             placeholder="Name"
-            className="border border-slate-300"
+            className="border border-slate-300 p-2 rounded-lg text-black"
             required
             onChange={handleChange}
             value={formData.name}
           />
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 items-center">
           <label htmlFor="email">Email</label>
           <input
             id="email"
             type="email"
             placeholder="Email"
-            className="border border-slate-300"
+            className="border border-slate-300 p-2 rounded-lg text-black"
             required
             onChange={handleChange}
             value={formData.email}
           />
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 items-center">
           <label htmlFor="mobile">Mobile No.</label>
           <input
             id="mobile"
             type="tel"
             placeholder="Mobile"
-            className="border border-slate-300"
+            className="border border-slate-300 p-2 rounded-lg text-black"
             required
             onChange={handleChange}
             value={formData.mobile}
           />
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 items-center">
           <label htmlFor="designation">Designation</label>
           <select
             id="designation"
-            className="border border-slate-300"
+            className="border border-slate-300 p-2 rounded-lg text-black"
             required
             onChange={handleChange}
             value={formData.designation}
           >
-            <option disabled value="">
+            <option className="text-black" disabled value="">
               Select
             </option>
-            <option value="developer">Developer</option>
-            <option value="hr">HR</option>
-            <option value="manager">Manager</option>
-            <option value="sales">Sales</option>
+            <option className="text-black" value="deve  per">Developer</option>
+            <option className="text-black" value="hr">HR</option>
+            <option className="text-black" value="manager">Manager</option>
+            <option className="text-black" value="sales">Sales</option>
           </select>
         </div>
         <div className="flex flex-col gap-2">
@@ -164,7 +164,7 @@ const handleChange = (e) => {
             id="male"
             name="gender"
             type="radio"
-            className="border border-slate-300"
+            className="border border-slate-300 p-2 rounded-lg text-black"
             onChange={handleChange}
             value="male"
             checked={formData.gender==='male'}
@@ -201,8 +201,9 @@ const handleChange = (e) => {
             <input
               type="checkbox"
               id="mca"
+              value="MCA"
               onChange={handleChange}
-              checked={formData.course.includes('mca')}
+              checked={ formData.course.includes('MCA')}
             />
             <label htmlFor="mca">MCA</label>
           </div>
@@ -210,8 +211,9 @@ const handleChange = (e) => {
             <input
               type="checkbox"
               id="bca"
+              value="BCA"
               onChange={handleChange}
-              checked={formData.course.includes('bca')}
+              checked={formData.course.includes('BCA')}
               
             />
             <label htmlFor="bca">BCA</label>
@@ -220,9 +222,9 @@ const handleChange = (e) => {
             <input
               type="checkbox"
               id="be"
+              value="BE"
               onChange={handleChange}
-              checked={formData.course.includes('be')}
-              
+              checked={formData.course.includes('BE')}
             />
             <label htmlFor="be">BE</label>
             </div>
